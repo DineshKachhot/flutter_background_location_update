@@ -1,5 +1,5 @@
 name: flutter_background_location_example
-description: Demonstrates how to use the flutter_background_location plugin.
+description: Demonstrates how to use the flutter_background_location_update plugin.
 publish_to: 'none'
 
 environment:
@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_background_location:
+  flutter_background_location_update:
     path: ../
 
 # For information on the generic Dart part of this file, see the

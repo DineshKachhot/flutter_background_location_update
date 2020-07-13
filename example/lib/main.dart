@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_background_location/flutter_background_location.dart';
+import 'package:flutter_background_location_update/flutter_background_location.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    FlutterBackgroundLocation.startLocationService();
+    FlutterBackgroundLocation.startLocationService(timeInterval: 1, distanceFilter: 50);
     FlutterBackgroundLocation.getLocationUpdates((location) {
       setState(() {
         this.latitude = location.latitude.toString();

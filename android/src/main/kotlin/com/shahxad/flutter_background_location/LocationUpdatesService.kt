@@ -48,6 +48,9 @@ class LocationUpdatesService : Service() {
         get() {
             val intent = Intent(this, LocationUpdatesService::class.java)
 
+            UPDATE_INTERVAL_IN_MILLISECONDS = intent.getIntExtra("time_interval")
+            FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
+
             intent.putExtra(EXTRA_STARTED_FROM_NOTIFICATION, true)
 
             val activityPendingIntent = PendingIntent.getBroadcast(this, 0, Intent(STOP_SERVICE), 0)
