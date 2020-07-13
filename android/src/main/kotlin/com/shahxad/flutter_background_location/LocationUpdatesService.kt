@@ -47,7 +47,7 @@ class LocationUpdatesService : Service() {
     private val notification: Notification
         get() {
             val intent = Intent(this, LocationUpdatesService::class.java)
-
+            print(intent.getLongExtra("time_interval", 0) * 60000)
             UPDATE_INTERVAL_IN_MILLISECONDS = intent.getLongExtra("time_interval", 0) * 60000
             FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
 

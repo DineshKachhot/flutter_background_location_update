@@ -10,7 +10,7 @@ class FlutterBackgroundLocation {
     _channel.invokeMapMethod("stop_location_service");
   }
 
-  static startLocationService({int timeInterval, int distanceFilter}) {
+  static startLocationService({double timeInterval, double distanceFilter}) {
     _channel.invokeMapMethod("start_location_service", <String, dynamic>{"time_interval": timeInterval, "distance_filter": distanceFilter});
   }
 
