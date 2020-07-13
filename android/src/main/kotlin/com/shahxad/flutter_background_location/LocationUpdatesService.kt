@@ -46,11 +46,6 @@ class LocationUpdatesService : Service() {
 
     private val notification: Notification
         get() {
-            val intent = Intent(this, LocationUpdatesService::class.java)
-            print(intent.getLongExtra("time_interval", 0) * 60000)
-            UPDATE_INTERVAL_IN_MILLISECONDS = intent.getLongExtra("time_interval", 0) * 60000
-            FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
-
             intent.putExtra(EXTRA_STARTED_FROM_NOTIFICATION, true)
 
             val activityPendingIntent = PendingIntent.getBroadcast(this, 0, Intent(STOP_SERVICE), 0)
@@ -74,6 +69,11 @@ class LocationUpdatesService : Service() {
     private var mServiceHandler: Handler? = null
 
     override fun onCreate() {
+
+        val intent = Intent(this, LocationUpdatesService::class.java)
+        print(intent.getLongExtra("time_interval", 0) * 60000)
+        UPDATE_INTERVAL_IN_MILLISECONDS = intent.getLongExtra("time_interval", 0) * 60000
+        FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
