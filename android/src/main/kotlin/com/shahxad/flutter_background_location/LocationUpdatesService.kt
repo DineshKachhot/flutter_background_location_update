@@ -35,8 +35,8 @@ class LocationUpdatesService : Service() {
         internal val ACTION_BROADCAST = "$PACKAGE_NAME.broadcast"
         internal val EXTRA_LOCATION = "$PACKAGE_NAME.location"
         private val EXTRA_STARTED_FROM_NOTIFICATION = "$PACKAGE_NAME.started_from_notification"
-        private val UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000
-        private val FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
+        private var UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000
+        private var FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
         private val NOTIFICATION_ID = 12345678
         private lateinit var broadcastReceiver: BroadcastReceiver
 
@@ -48,8 +48,8 @@ class LocationUpdatesService : Service() {
         get() {
             val intent = Intent(this, LocationUpdatesService::class.java)
 
-            // UPDATE_INTERVAL_IN_MILLISECONDS = intent.getIntExtra("time_interval") * 60000
-            // FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
+            UPDATE_INTERVAL_IN_MILLISECONDS = intent.getLongExtra("time_interval", 0) * 60000
+            FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
 
             intent.putExtra(EXTRA_STARTED_FROM_NOTIFICATION, true)
 

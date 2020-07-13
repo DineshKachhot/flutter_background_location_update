@@ -80,10 +80,10 @@ class FlutterBackgroundLocationPlugin() : MethodCallHandler, PluginRegistry.Requ
                 LocalBroadcastManager.getInstance(activity).registerReceiver(myReceiver!!,
                         IntentFilter(LocationUpdatesService.ACTION_BROADCAST))
                 if (!mBound) {
-//                    var  intent = Intent(activity, LocationUpdatesService::class.java)
-//                    var timeInterval: Int = call.argument("time_interval")
-//                    intent.putExtra("time_interval": timeInterval)
-                    activity.bindService(Intent(activity, LocationUpdatesService::class.java), mServiceConnection, Context.BIND_AUTO_CREATE)
+                   var  intent = Intent(activity, LocationUpdatesService::class.java)
+                   val timeInterval = call.argument<Long>("time_interval")
+                   intent.putExtra("time_interval": timeInterval)
+                    activity.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
                 }
 /*
                 if (mService != null) {
