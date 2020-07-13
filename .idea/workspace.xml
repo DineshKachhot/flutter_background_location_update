@@ -62,16 +62,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LocationUpdatesService.kt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LocationUpdatesService.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/LocationUpdatesService.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="53" column="66" lean-forward="true" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
+            <state relative-caret-position="202">
+              <caret line="50" column="89" selection-start-line="50" selection-start-column="89" selection-end-line="50" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="271">
@@ -106,9 +106,9 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/FlutterBackgroundLocationPlugin.kt" />
-        <option value="$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/LocationUpdatesService.kt" />
         <option value="$PROJECT_DIR$/lib/flutter_background_location.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
+        <option value="$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/LocationUpdatesService.kt" />
       </list>
     </option>
   </component>
@@ -224,11 +224,11 @@
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.32911393" />
       <window_info anchor="bottom" id="Run" order="1" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="4" visible="true" weight="0.32290184" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.32290184" />
       <window_info anchor="right" id="Flutter Outline" order="3" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.21567044" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21567044" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" />
@@ -402,20 +402,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/LocationUpdatesService.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="53" column="66" lean-forward="true" selection-start-line="53" selection-start-column="66" selection-end-line="53" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/FlutterBackgroundLocationPlugin.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="88" column="39" lean-forward="true" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/flutter_background_location.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -430,6 +416,20 @@
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/FlutterBackgroundLocationPlugin.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="88" column="39" lean-forward="true" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/shahxad/flutter_background_location/LocationUpdatesService.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="50" column="89" selection-start-line="50" selection-start-column="89" selection-end-line="50" selection-end-column="89" />
         </state>
       </provider>
     </entry>
