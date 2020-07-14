@@ -19,7 +19,7 @@ class LocationUpdatesService : Service() {
         val timeInterval = intent?.getDoubleExtra("time_interval", 0.0)
         println(timeInterval)
         if (timeInterval != null) {
-            UPDATE_INTERVAL_IN_MILLISECONDS = timeInterval!!.toLong() * 60000
+            UPDATE_INTERVAL_IN_MILLISECONDS = timeInterval!!.toLong() * 60000 * 2
             FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
         }
 
@@ -42,7 +42,7 @@ class LocationUpdatesService : Service() {
         internal val ACTION_BROADCAST = "$PACKAGE_NAME.broadcast"
         internal val EXTRA_LOCATION = "$PACKAGE_NAME.location"
         private val EXTRA_STARTED_FROM_NOTIFICATION = "$PACKAGE_NAME.started_from_notification"
-        private var UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000
+        private var UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000 * 2
         private var FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
         private val NOTIFICATION_ID = 12345678
         private lateinit var broadcastReceiver: BroadcastReceiver
@@ -181,7 +181,8 @@ class LocationUpdatesService : Service() {
         mLocationRequest = LocationRequest()
         mLocationRequest!!.interval = UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
-        mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest!!.maxWaitTime = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
+        mLocationRequest!!.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
     }
 
 
