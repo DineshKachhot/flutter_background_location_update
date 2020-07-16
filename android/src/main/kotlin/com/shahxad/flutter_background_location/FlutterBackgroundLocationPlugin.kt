@@ -84,8 +84,9 @@ class FlutterBackgroundLocationPlugin() : MethodCallHandler, PluginRegistry.Requ
                    val timeInterval = call.argument<Double>("time_interval")
                    println(timeInterval)
                    intent.putExtra("time_interval", timeInterval)
-                   intent.putExtra("one", "one")
-                   intent.putExtra("two", "two")
+                    val minDisplacement = call.argument<Double>("distance_filter")
+                    println(minDisplacement)
+                   intent.putExtra("min_displacement", minDisplacement)
                     activity.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE)
                 }
 /*

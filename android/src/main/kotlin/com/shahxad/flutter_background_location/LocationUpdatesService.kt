@@ -17,10 +17,14 @@ class LocationUpdatesService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? {
         val timeInterval = intent?.getDoubleExtra("time_interval", 0.0)
+        val minDisplacement = intent?.getDoubleExtra("min_displacement", 0.0)
         println(timeInterval)
         if (timeInterval != null) {
             UPDATE_INTERVAL_IN_MILLISECONDS = timeInterval!!.toLong() * 60000 * 2
             FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
+        }
+        if (minDisplacement != null) {
+            MIN_DISPLACEMENT_IN_METERS = minDisplacement.toLong()
         }
 
         return mBinder
@@ -44,6 +48,7 @@ class LocationUpdatesService : Service() {
         private val EXTRA_STARTED_FROM_NOTIFICATION = "$PACKAGE_NAME.started_from_notification"
         private var UPDATE_INTERVAL_IN_MILLISECONDS: Long = 60000 * 2
         private var FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
+        private var MIN_DISPLACEMENT_IN_METERS: Long = 10
         private val NOTIFICATION_ID = 12345678
         private lateinit var broadcastReceiver: BroadcastReceiver
 
@@ -182,7 +187,11 @@ class LocationUpdatesService : Service() {
         mLocationRequest!!.interval = UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.maxWaitTime = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
-        mLocationRequest!!.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+        mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        if (MIN_DISPLACEMENT_IN_METERS > 0) {
+            mLocationRequest!!.setSmallestDisplacement(MIN_DISPLACEMENT_IN_METERS.toFloat())
+        }
+        
     }
 
 
