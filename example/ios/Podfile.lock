@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_background_location_update (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_background_location_update (from `.symlinks/plugins/flutter_background_location_update/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_background_location_update:
+    :path: ".symlinks/plugins/flutter_background_location_update/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_background_location_update: 33b5bb001cb491011017fd1f095f7c6aefd95bcd
+
+PODFILE CHECKSUM: 2609452b760cd11039b14039a86564367a3d8ab9
+
+COCOAPODS: 1.9.3
