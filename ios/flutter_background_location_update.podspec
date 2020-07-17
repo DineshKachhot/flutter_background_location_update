@@ -2,7 +2,7 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_background_location'
+  s.name             = 'flutter_background_location_update'
   s.version          = '0.0.1'
   s.summary          = 'A Flutter plugin to get location updates when application is in background.'
   s.description      = <<-DESC
