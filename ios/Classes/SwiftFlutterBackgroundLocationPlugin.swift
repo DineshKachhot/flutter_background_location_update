@@ -18,8 +18,11 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
         SwiftFlutterBackgroundLocationPlugin.locationManager = CLLocationManager()
         SwiftFlutterBackgroundLocationPlugin.locationManager?.delegate = self
         SwiftFlutterBackgroundLocationPlugin.locationManager?.requestWhenInUseAuthorization()
-        SwiftFlutterBackgroundLocationPlugin.locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        SwiftFlutterBackgroundLocationPlugin.locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
         SwiftFlutterBackgroundLocationPlugin.locationManager?.pausesLocationUpdatesAutomatically = false
+        if #available(iOS 11.0, *) {
+            SwiftFlutterBackgroundLocationPlugin.locationManager?.showsBackgroundLocationIndicator = false
+        }
         if #available(iOS 9.0, *) {
             SwiftFlutterBackgroundLocationPlugin.locationManager?.allowsBackgroundLocationUpdates = true
         }
