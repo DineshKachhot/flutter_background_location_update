@@ -55,6 +55,10 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
 
         }
     }
+    
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location update failed with error: \(error.localizedDescription)")
+    }
 
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = [
@@ -63,7 +67,7 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
             "latitude": locations.last!.coordinate.latitude,
             "longitude": locations.last!.coordinate.longitude,
             "accuracy": locations.last!.horizontalAccuracy,
-            "bearing": locations.last!.course
+            "bearing": locations.last!.course,
         ] as [String : Any]
 
         SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: location)
