@@ -17,7 +17,12 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         SwiftFlutterBackgroundLocationPlugin.locationManager = CLLocationManager()
         SwiftFlutterBackgroundLocationPlugin.locationManager?.delegate = self
-        SwiftFlutterBackgroundLocationPlugin.locationManager?.requestAlwaysAuthorization()
+        SwiftFlutterBackgroundLocationPlugin.locationManager?.requestWhenInUseAuthorization()
+        SwiftFlutterBackgroundLocationPlugin.locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        SwiftFlutterBackgroundLocationPlugin.locationManager?.pausesLocationUpdatesAutomatically = false
+        if #available(iOS 9.0, *) {
+            SwiftFlutterBackgroundLocationPlugin.locationManager?.allowsBackgroundLocationUpdates = true
+        }
         if let args = call.arguments as? Dictionary<String, Any>, let distanceFilter = args["distance_filter"] as? Double {
             SwiftFlutterBackgroundLocationPlugin.locationManager?.distanceFilter = distanceFilter
         }
