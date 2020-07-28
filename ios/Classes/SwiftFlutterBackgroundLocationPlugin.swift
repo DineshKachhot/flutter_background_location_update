@@ -42,6 +42,11 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
         } else if (call.method == "stop_location_service") {
             SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "stop_location_service")
             SwiftFlutterBackgroundLocationPlugin.locationManager?.stopUpdatingLocation()
+        } else if (call.method == "one_shot_location") {
+            SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
+            if #available(iOS 9.0, *) {
+                SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
+            }
         }
     }
 

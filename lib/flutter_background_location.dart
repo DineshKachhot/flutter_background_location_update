@@ -10,6 +10,10 @@ class FlutterBackgroundLocation {
     _channel.invokeMapMethod("stop_location_service");
   }
 
+  static getOneShotLocation() {
+    _channel.invokeListMethod('one_shot_location');
+  }
+
   static startLocationService({double timeInterval, double distanceFilter}) {
     _channel.invokeMapMethod("start_location_service", <String, dynamic>{"time_interval": timeInterval, "distance_filter": distanceFilter});
   }
