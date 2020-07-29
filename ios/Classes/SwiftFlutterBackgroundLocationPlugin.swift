@@ -47,10 +47,18 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
         }
         
         func getOneShotLocation() {
-             SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
-            SwiftFlutterBackgroundLocationPlugin.locationManager?.stopUpdatingLocation()
-            SwiftFlutterBackgroundLocationPlugin.locationManager?.startUpdatingLocation()
-
+//             SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
+//            SwiftFlutterBackgroundLocationPlugin.locationManager?.stopUpdatingLocation()
+//            SwiftFlutterBackgroundLocationPlugin.locationManager?.startUpdatingLocation()
+let location = [
+            "speed": 0.0,
+            "altitude": 0.0,
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "accuracy": 0.0,
+            "bearing": 0.0,
+        ] as [String : Any]
+            SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: location)
         }
         
         SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "method")
