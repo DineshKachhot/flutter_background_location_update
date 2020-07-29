@@ -38,7 +38,7 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
         
         if let args = call.arguments as? Dictionary<String, Any>, let timeInterval = args["time_interval"] as? Double {
             if #available(iOS 10.0, *) {
-                SwiftFlutterBackgroundLocationPlugin.timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
+                SwiftFlutterBackgroundLocationPlugin.timer = Timer.scheduledTimer(withTimeInterval: timeInterval*60, repeats: true) { timer in
                     SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
                 }
             }
