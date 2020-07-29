@@ -92,9 +92,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   getCurrentLocation() {
-    FlutterBackgroundLocation().getCurrentLocation().then((location) {
-      print("This is current Location" + location.longitude.toString());
-    });
+    // FlutterBackgroundLocation().getCurrentLocation().then((location) {
+    //   print("This is current Location" + location.longitude.toString());
+    // });
+
+    FlutterBackgroundLocation.getOneShotLocation();
   }
 
   @override
