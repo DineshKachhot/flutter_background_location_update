@@ -42,7 +42,8 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
                 SwiftFlutterBackgroundLocationPlugin.timer = Timer.scheduledTimer(withTimeInterval: timeInterval*60, repeats: true) { timer in
                     print("Location timer callback")
                      SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
-                    SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
+//                    SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
+                    OneShotLocation().getOneShotLocation()
                 }
             }
         }
@@ -58,9 +59,9 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
             SwiftFlutterBackgroundLocationPlugin.timer?.invalidate()
         } else if (call.method == "one_shot_location") {
             SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
-            if #available(iOS 9.0, *) {
-                SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
-            }
+//            if #available(iOS 9.0, *) {
+//                SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
+//            }
         }
     }
 
@@ -86,4 +87,45 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
 
         SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: location)
     }
+    
+}
+
+class OneShotLocation: NSObject, CLLocationManagerDelegate {
+    
+    private var oneshotLocationManager: CLLocationManager?
+    
+    func getOneShotLocation() {
+        oneshotLocationManager = CLLocationManager()
+        oneshotLocationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        oneshotLocationManager?.distanceFilter = 0
+        oneshotLocationManager?.delegate = self
+        oneshotLocationManager?.startUpdatingLocation()
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = [
+            "speed": locations.last!.speed,
+            "altitude": locations.last!.altitude,
+            "latitude": locations.last!.coordinate.latitude,
+            "longitude": locations.last!.coordinate.longitude,
+            "accuracy": locations.last!.horizontalAccuracy,
+            "bearing": locations.last!.course,
+        ] as [String : Any]
+
+        SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: location)
+        oneshotLocationManager?.stopUpdatingLocation()
+        oneshotLocationManager = nil
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+
+        }
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location update failed with error: \(error.localizedDescription)")
+    }
+
 }
