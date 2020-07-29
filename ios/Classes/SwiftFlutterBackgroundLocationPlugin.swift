@@ -41,6 +41,7 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
                 print("Timer is scheduled for \(timeInterval) time interval")
                 SwiftFlutterBackgroundLocationPlugin.timer = Timer.scheduledTimer(withTimeInterval: timeInterval*60, repeats: true) { timer in
                     print("Location timer callback")
+                     SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
                     SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
                 }
             }
