@@ -5,6 +5,7 @@ import CoreLocation
 public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLocationManagerDelegate {
     static var locationManager: CLLocationManager?
     static var channel: FlutterMethodChannel?
+    static var timer: Timer?
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let instance = SwiftFlutterBackgroundLocationPlugin()
@@ -34,6 +35,15 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
         if let args = call.arguments as? Dictionary<String, Any>, let distanceFilter = args["distance_filter"] as? Double {
             SwiftFlutterBackgroundLocationPlugin.locationManager?.distanceFilter = distanceFilter
         }
+        
+        if let args = call.arguments as? Dictionary<String, Any>, let timeInterval = args["time_interval"] as? Double {
+            if #available(iOS 10.0, *) {
+                SwiftFlutterBackgroundLocationPlugin.timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
+                    SwiftFlutterBackgroundLocationPlugin.locationManager?.requestLocation()
+                }
+            }
+        }
+        
         SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "method")
 
         if (call.method == "start_location_service") {
@@ -42,6 +52,7 @@ public class SwiftFlutterBackgroundLocationPlugin: NSObject, FlutterPlugin, CLLo
         } else if (call.method == "stop_location_service") {
             SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "stop_location_service")
             SwiftFlutterBackgroundLocationPlugin.locationManager?.stopUpdatingLocation()
+            SwiftFlutterBackgroundLocationPlugin.timer?.invalidate()
         } else if (call.method == "one_shot_location") {
             SwiftFlutterBackgroundLocationPlugin.channel?.invokeMethod("location", arguments: "one_shot_location")
             if #available(iOS 9.0, *) {
