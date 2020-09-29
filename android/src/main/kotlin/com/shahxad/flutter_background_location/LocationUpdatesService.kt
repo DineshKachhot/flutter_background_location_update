@@ -33,8 +33,10 @@ class LocationUpdatesService : Service() {
     private val mBinder = LocalBinder()
     private var mNotificationManager: NotificationManager? = null
     private var mLocationRequest: LocationRequest? = null
+    private var mDistanceRequest: LocationRequest? = null
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var mLocationCallback: LocationCallback? = null
+    private var mDistanceCallback: LocationCallback? = null
     private var mLocation: Location? = null
 
 
@@ -97,6 +99,15 @@ class LocationUpdatesService : Service() {
                 onNewLocation(locationResult!!.lastLocation)
             }
         }
+        mDistanceCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                super.onLocationResult(locationResult)
+
+
+
+                onNewLocation(locationResult!!.lastLocation)
+            }
+        }
         createLocationRequest()
         getLastLocation()
 
@@ -140,6 +151,8 @@ class LocationUpdatesService : Service() {
         try {
             mFusedLocationClient!!.requestLocationUpdates(mLocationRequest,
                     mLocationCallback!!, Looper.myLooper())
+            mFusedLocationClient!!.requestLocationUpdates(mDistanceRequest,
+                    mDistanceCallback!!, Looper.myLooper())
         } catch (unlikely: SecurityException) {
             Utils.setRequestingLocationUpdates(this, false)
         }
@@ -149,6 +162,7 @@ class LocationUpdatesService : Service() {
     fun removeLocationUpdates() {
         try {
             mFusedLocationClient!!.removeLocationUpdates(mLocationCallback!!)
+            mFusedLocationClient!!.removeLocationUpdates(mDistanceCallback!!)
             Utils.setRequestingLocationUpdates(this, false)
             mNotificationManager!!.cancel(NOTIFICATION_ID)
             stopSelf()
@@ -188,10 +202,13 @@ class LocationUpdatesService : Service() {
         mLocationRequest!!.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.maxWaitTime = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+
+        mDistanceRequest = LocationRequest()
+        mDistanceRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (MIN_DISPLACEMENT_IN_METERS > 0) {
-            mLocationRequest!!.setSmallestDisplacement(MIN_DISPLACEMENT_IN_METERS.toFloat())
+            mDistanceRequest!!.setSmallestDisplacement(MIN_DISPLACEMENT_IN_METERS.toFloat())
         }
-        
     }
 
 
