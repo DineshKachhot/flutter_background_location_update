@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.location.Location
 import android.os.*
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.location.*
@@ -20,7 +21,7 @@ class LocationUpdatesService : Service() {
         val minDisplacement = intent?.getDoubleExtra("min_displacement", 0.0)
         println(timeInterval)
         if (timeInterval != null) {
-            UPDATE_INTERVAL_IN_MILLISECONDS = timeInterval!!.toLong() * 60000 * 2
+            UPDATE_INTERVAL_IN_MILLISECONDS = timeInterval.toLong() * 60000 * 2
             FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2
         }
         if (minDisplacement != null) {
@@ -189,6 +190,7 @@ class LocationUpdatesService : Service() {
     }
 
     private fun onNewLocation(location: Location) {
+        Log.d("Print Speed: ",location.speed.toString())
         mLocation = location
         val intent = Intent(ACTION_BROADCAST)
         intent.putExtra(EXTRA_LOCATION, location)
@@ -202,12 +204,16 @@ class LocationUpdatesService : Service() {
         mLocationRequest!!.fastestInterval = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.maxWaitTime = FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS
         mLocationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        mLocationRequest!!.smallestDisplacement = 0.0.toFloat()
 
 
         mDistanceRequest = LocationRequest()
+        mDistanceRequest!!.interval = 0
+        mDistanceRequest!!.fastestInterval = 0
+        mDistanceRequest!!.maxWaitTime = 0
         mDistanceRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (MIN_DISPLACEMENT_IN_METERS > 0) {
-            mDistanceRequest!!.setSmallestDisplacement(MIN_DISPLACEMENT_IN_METERS.toFloat())
+            mDistanceRequest!!.smallestDisplacement = MIN_DISPLACEMENT_IN_METERS.toFloat()
         }
     }
 

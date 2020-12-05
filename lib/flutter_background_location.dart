@@ -38,13 +38,15 @@ class FlutterBackgroundLocation {
     _channel.setMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == "location") {
         Map locationData = Map.from(methodCall.arguments);
+        // print(locationData["speed"]);
         location(_Location(
             latitude: locationData["latitude"],
             longitude: locationData["longitude"],
             altitude: locationData["altitude"],
             accuracy: locationData["accuracy"],
             bearing: locationData["bearing"],
-            speed: locationData["speed"]));
+            speed: locationData["speed"] * 3.6, // To convert meter/second to km/second
+            ));
       }
     });
   }
