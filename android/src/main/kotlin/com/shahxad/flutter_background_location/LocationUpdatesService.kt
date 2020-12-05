@@ -100,6 +100,7 @@ class LocationUpdatesService : Service() {
                 onNewLocation(locationResult!!.lastLocation)
             }
         }
+        Log.d("onCreate: ", "Distance callback is initialized")
         mDistanceCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 super.onLocationResult(locationResult)
@@ -209,8 +210,8 @@ class LocationUpdatesService : Service() {
 
         mDistanceRequest = LocationRequest()
         mDistanceRequest!!.interval = 0
-        mDistanceRequest!!.fastestInterval = 0
-        mDistanceRequest!!.maxWaitTime = 0
+//        mDistanceRequest!!.fastestInterval = 0
+//        mDistanceRequest!!.maxWaitTime = 0
         mDistanceRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (MIN_DISPLACEMENT_IN_METERS > 0) {
             mDistanceRequest!!.smallestDisplacement = MIN_DISPLACEMENT_IN_METERS.toFloat()
