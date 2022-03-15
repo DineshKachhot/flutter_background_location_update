@@ -14,14 +14,14 @@ class FlutterBackgroundLocation {
     _channel.invokeListMethod('one_shot_location');
   }
 
-  static startLocationService({double timeInterval, double distanceFilter}) {
+  static startLocationService({double? timeInterval, double? distanceFilter}) {
     _channel.invokeMapMethod("start_location_service", <String, dynamic>{"time_interval": timeInterval, "distance_filter": distanceFilter});
   }
 
   Future<_Location> getCurrentLocation() async {
     Completer<_Location> completer = Completer();
 
-    _Location _location = _Location();
+    _Location? _location = _Location();
     await getLocationUpdates((location) {
       _location.latitude = location.latitude;
       _location.longitude = location.longitude;
@@ -61,10 +61,10 @@ class _Location {
         this.bearing,
         this.speed});
 
-  double latitude;
-  double longitude;
-  double altitude;
-  double bearing;
-  double accuracy;
-  double speed;
+  double? latitude;
+  double? longitude;
+  double? altitude;
+  double? bearing;
+  double? accuracy;
+  double? speed;
 }
